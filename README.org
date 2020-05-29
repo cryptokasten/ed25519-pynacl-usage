@@ -1,0 +1,75 @@
+#+TITLE: Ed25519 pynacl usage
+#+OPTIONS: ^:nil
+#+PROPERTY: header-args:sh :session *shell ed25519-pynacl-usage sh* :results silent raw
+#+PROPERTY: header-args:python :session *shell ed25519-pynacl-usage python* :results silent raw
+
+** System environment
+
+- Debian 9.11
+
+- Python 3.7.0
+
+Python modules:
+
+- PyNaCl==1.4.0
+
+** Imports
+
+#+BEGIN_SRC python
+import nacl.signing
+import nacl.encoding
+#+END_SRC
+
+** Signing Key
+*** Generate a new key
+
+#+BEGIN_SRC python :results replace code
+signing_key = nacl.signing.SigningKey.generate()
+signing_key._seed.hex()
+#+END_SRC
+
+#+RESULTS:
+#+begin_src python
+d087960ecec7f1020cdf9119b4fd7c8470705f99f8420967e211a5b17610e13d
+#+end_src
+
+*** From hex
+
+#+BEGIN_SRC python :results replace code
+hex_key = "5d6b9774c1fe2a3ccdf8d84b4dab3ca4327bc462b7845a353b97c8cd8aa2e845"
+signing_key = nacl.signing.SigningKey(hex_key, nacl.encoding.HexEncoder)
+signing_key.encode(nacl.encoding.HexEncoder)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src python
+b'5d6b9774c1fe2a3ccdf8d84b4dab3ca4327bc462b7845a353b97c8cd8aa2e845'
+#+end_src
+
+** Get a public key
+
+#+BEGIN_SRC python :results replace code
+signing_key.verify_key._key.hex()
+#+END_SRC
+
+#+RESULTS:
+#+begin_src python
+f28ec61f09d7c64b74c0a31655dd83b8771f583c5e54a4661bbbbac8fdd554e9
+#+end_src
+
+** Sign a message
+
+#+BEGIN_SRC python :results replace code
+msg = b"Message"
+signing_key.sign(msg)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src python
+b'\rCWZc\xd2\xd0f4jw\xafF\xa8p{iK\xb0\xb3\x92f@q\xa5<F\xb5\xc1|_\x80\xa2&I\x0b\x814\x89\x10W{\xc8\xb0+^\n\xbd\xc3\xd4\t$\xb3/X\xaeG\xa3\x03\xe5\xf3\x1d\xf4\rMessage'
+#+end_src
+
+** References
+
+- https://pynacl.readthedocs.io/en/stable/signing/
+
