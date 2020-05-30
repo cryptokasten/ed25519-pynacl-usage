@@ -49,7 +49,8 @@ b'5d6b9774c1fe2a3ccdf8d84b4dab3ca4327bc462b7845a353b97c8cd8aa2e845'
 ** Get a public key
 
 #+BEGIN_SRC python :results replace code
-signing_key.verify_key._key.hex()
+pubkey = signing_key.verify_key
+pubkey._key.hex()
 #+END_SRC
 
 #+RESULTS:
