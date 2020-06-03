@@ -23,7 +23,7 @@ import nacl.encoding
 ** Signing Key
 *** Generate a new key
 
-#+BEGIN_SRC python :results replace code
+#+BEGIN_SRC python :results replace code :exports both
 signing_key = nacl.signing.SigningKey.generate()
 signing_key._seed.hex()
 #+END_SRC
@@ -35,7 +35,7 @@ d087960ecec7f1020cdf9119b4fd7c8470705f99f8420967e211a5b17610e13d
 
 *** From hex
 
-#+BEGIN_SRC python :results replace code
+#+BEGIN_SRC python :results replace code :exports both
 hex_key = "5d6b9774c1fe2a3ccdf8d84b4dab3ca4327bc462b7845a353b97c8cd8aa2e845"
 signing_key = nacl.signing.SigningKey(hex_key, nacl.encoding.HexEncoder)
 signing_key.encode(nacl.encoding.HexEncoder)
@@ -48,7 +48,7 @@ b'5d6b9774c1fe2a3ccdf8d84b4dab3ca4327bc462b7845a353b97c8cd8aa2e845'
 
 ** Get a public key
 
-#+BEGIN_SRC python :results replace code
+#+BEGIN_SRC python :results replace code :exports both
 pubkey = signing_key.verify_key
 pubkey._key.hex()
 #+END_SRC
@@ -60,7 +60,7 @@ f28ec61f09d7c64b74c0a31655dd83b8771f583c5e54a4661bbbbac8fdd554e9
 
 ** Sign a message
 
-#+BEGIN_SRC python :results replace code
+#+BEGIN_SRC python :results replace code :exports both
 msg = b"Message"
 signing_key.sign(msg)
 #+END_SRC
